@@ -178,6 +178,8 @@ static const char version[] =
         "AArch64"
 #elif defined TCC_TARGET_RISCV64
         "riscv64"
+#elif defined TCC_TARGET_LC3
+	"lc3"
 #endif
 #ifdef TCC_TARGET_PE
         " Windows"
@@ -189,6 +191,8 @@ static const char version[] =
         " OpenBSD"
 #elif TARGETOS_NetBSD
         " NetBSD"
+#elif defined(TCC_TARGET_LC3)
+	" unknown"
 #else
         " Linux"
 #endif

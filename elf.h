@@ -276,6 +276,7 @@ typedef struct
 
 #define EM_ALPHA	0x9026
 #define EM_C60		0x9c60
+#define EM_LC3		0x1145
 
 /* Legal values for e_version (version).  */
 
@@ -3316,5 +3317,18 @@ typedef Elf32_Addr Elf32_Conflict;
 
 #define R_RISCV_NUM		58
 
+/*	LC-3 Relocations	*/
+
+#define R_LC3_NONE		0
+#define R_LC3_16		1
+#define R_LC3_32		2
+#define R_LC3_5			3
+#define R_LC3_8_HI		4
+#define R_LC3_8_LO		5
+#define R_LC3_PCREL_5		6
+#define R_LC3_PCREL_9		7
+#define R_LC3_NEAR_CALL		8
+
+#define R_LC3_NUM		9
 
 #endif	/* elf.h */

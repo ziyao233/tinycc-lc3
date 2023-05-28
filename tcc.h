@@ -158,7 +158,8 @@ extern long double strtold (const char *__nptr, char **__endptr);
 /* default target is I386 */
 #if !defined(TCC_TARGET_I386) && !defined(TCC_TARGET_ARM) && \
     !defined(TCC_TARGET_ARM64) && !defined(TCC_TARGET_C67) && \
-    !defined(TCC_TARGET_X86_64) && !defined(TCC_TARGET_RISCV64)
+    !defined(TCC_TARGET_X86_64) && !defined(TCC_TARGET_RISCV64) && \
+    !defined(TCC_TARGET_LC3)
 # if defined __x86_64__
 #  define TCC_TARGET_X86_64
 # elif defined __arm__
@@ -342,6 +343,8 @@ extern long double strtold (const char *__nptr, char **__endptr);
 #   define CONFIG_TCC_ELFINTERP "/lib/ld-linux.so.2"
 #  endif
 # endif
+# elif defined(TCC_TARGET_LC3)
+#  define CONFIG_TCC_ELFINTERP "/lib/ld-lc3os-lc3.so"
 #endif
 
 /* var elf_interp dans *-gen.c */
@@ -428,6 +431,10 @@ extern long double strtold (const char *__nptr, char **__endptr);
 # include "riscv64-gen.c"
 # include "riscv64-link.c"
 # include "riscv64-asm.c"
+#elif defined(TCC_TARGET_LC3)
+# include "lc3-gen.c"
+# include "lc3-link.c"
+# include "lc3-asm.c"
 #else
 #error unknown target
 #endif
@@ -456,6 +463,8 @@ extern long double strtold (const char *__nptr, char **__endptr);
 
 #if PTR_SIZE == 8 && !defined TCC_TARGET_PE
 # define LONG_SIZE 8
+#elif defined(TCC_TARGET_LC3)
+# define LONG_SIZE 4
 #else
 # define LONG_SIZE 4
 #endif

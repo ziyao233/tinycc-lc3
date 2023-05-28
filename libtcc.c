@@ -49,6 +49,10 @@
 #include "riscv64-gen.c"
 #include "riscv64-link.c"
 #include "riscv64-asm.c"
+#elif defined(TCC_TARGET_LC3)
+#include "lc3-gen.c"
+#include "lc3-link.c"
+#include "lc3-asm.c"
 #else
 #error unknown target
 #endif
