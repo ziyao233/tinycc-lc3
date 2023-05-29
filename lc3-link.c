@@ -45,7 +45,7 @@ code_reloc(int reloc_type)
 int
 gotplt_entry_type(int reloc_type)
 {
-	return -1;
+	return 0;
 }
 
 ST_FUNC unsigned int
@@ -58,6 +58,13 @@ ST_FUNC void
 relocate_plt(TCCState *s1)
 {
 	return;
+}
+
+static void
+check_overflow(TCCState *s1, const char *type, int bits, int n)
+{
+	if ((n >> bits) + ((n >> (bits - 1)) & 1))
+		tcc_warning("%s: relocation overflow", type);
 }
 
 void
@@ -87,16 +94,19 @@ relocate(TCCState *s1, ElfW_Rel *rel, int type, unsigned char *ptr, addr_t addr,
 		write16le(ptr, (read16le(ptr) & 0xff00) | (val & 0x00ff));
 		return;
 	case R_LC3_PCREL_5:
+		check_overflow(s1, "R_LC3_PCREL_5", 5, val - addr - 1);
 		write16le(ptr, (read16le(ptr) & 0xffe0) |
-				(((val - addr) >> 1) & 0x1f));
+				(((val - addr - 1) >> 1) & 0x1f));
 		return;
 	case R_LC3_PCREL_9:
+		check_overflow(s1, "R_LC3_PCREL_9", 9, val - addr - 1);
 		write16le(ptr, (read16le(ptr) & 0xfe00) |
-				(((val - addr) >> 1) & 0x01ff));
+				(((val - addr - 1) >> 1) & 0x01ff));
 		return;
 	case R_LC3_NEAR_CALL:
+		check_overflow(s1, "R_LC3_NEAR_CALL", 11, val - addr - 1);
 		write16le(ptr, (read16le(ptr) & 0xf800) |
-				(((val - addr) >> 1) & 0x07ff));
+				(((val - addr - 1) >> 1) & 0x07ff));
 		return;
 	default:
 		tcc_error_noabort("Unimplemented relocation %d", type);

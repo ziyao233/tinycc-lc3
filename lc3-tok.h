@@ -1,0 +1,42 @@
+/*	lc3	*/
+
+/*	Registers	*/
+DEF_ASM(r0)
+DEF_ASM(r1)
+DEF_ASM(r2)
+DEF_ASM(r3)
+DEF_ASM(r4)
+DEF_ASM(r5)
+DEF_ASM(r6)
+DEF_ASM(r7)
+DEF_ASM(sp)
+DEF_ASM(ra)
+
+/*	Instructions	*/
+DEF_ASM(add)
+DEF_ASM(and)
+DEF_ASM(br)
+DEF_ASM(brn)
+DEF_ASM(brz)
+DEF_ASM(brp)
+DEF_ASM(brnz)
+DEF_ASM(brnp)
+DEF_ASM(brzp)
+DEF_ASM(brnzp)
+DEF_ASM(jmp)
+DEF_ASM(jsr)
+DEF_ASM(jsrr)
+DEF_ASM(ld)
+DEF_ASM(ldi)
+DEF_ASM(ldr)
+DEF_ASM(lea)
+DEF_ASM(not)
+DEF_ASM(ret)
+DEF_ASM(rti)
+DEF_ASM(st)
+DEF_ASM(sti)
+DEF_ASM(str)
+DEF_ASM(trap)
+
+/*	Pesudo-instructions	*/
+DEF_ASM(li)
