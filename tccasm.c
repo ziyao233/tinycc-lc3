@@ -688,6 +688,9 @@ static void asm_parse_directive(TCCState *s1, int global)
 		  expect("constant or same-section symbol");
 		n += esym->st_value;
 	    }
+            #ifdef TCC_TARGET_LC3
+            n <<= 1;
+            #endif
             if (n < ind)
                 tcc_error("attempt to .org backwards");
             v = 0;

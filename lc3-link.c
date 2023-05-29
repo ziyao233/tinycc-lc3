@@ -11,7 +11,7 @@
 
 #define R_NUM			R_LC3_NUM
 
-#define ELF_START_ADDR		0x0000
+#define ELF_START_ADDR		0x3000
 #define ELF_PAGE_SIZE		16
 
 #define PCRELATIVE_DLLPLT	0
