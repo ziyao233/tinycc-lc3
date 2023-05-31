@@ -239,7 +239,7 @@ asm_opcode(TCCState *s1, int token)
 		asm_op_trap(s1, token);
 		return;
 	case TOK_ASM_ret:
-		gen_le16(0xc100);
+		gen_le16(0xc1c0);
 		return;
 	case TOK_ASM_rti:
 		gen_le16(0x8000);
