@@ -196,6 +196,23 @@ asm_op_trap(TCCState *s1, int token)
 	return;
 }
 
+static void
+asm_op_load(TCCState *s1, int token)
+{
+	ExprValue ev;
+	gen_le16(inst_op(2) | inst_dr(parse_reg()) | 1);
+	skip(',');
+
+	gen_le16(0x0e01);
+
+	asm_expr(s1, &ev);
+	if (ev.sym)
+		greloc(cur_text_section, ev.sym, ind, R_LC3_16);
+	gen_le16(ev.v);
+
+	return;
+}
+
 ST_FUNC void
 asm_opcode(TCCState *s1, int token)
 {
@@ -219,6 +236,7 @@ asm_opcode(TCCState *s1, int token)
 		asm_op_jmp(s1, token);
 		return;
 	case TOK_ASM_jsr:
+	case TOK_ASM_call:
 		asm_op_nearcall(s1, token);
 		return;
 	case TOK_ASM_ld:
@@ -243,6 +261,9 @@ asm_opcode(TCCState *s1, int token)
 		return;
 	case TOK_ASM_rti:
 		gen_le16(0x8000);
+		return;
+	case TOK_ASM_li:
+		asm_op_load(s1, token);
 		return;
 	default:
 		expect("known opcode");

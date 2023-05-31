@@ -40,3 +40,4 @@ DEF_ASM(trap)
 
 /*	Pesudo-instructions	*/
 DEF_ASM(li)
+DEF_ASM(call)
